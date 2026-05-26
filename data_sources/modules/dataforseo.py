@@ -317,7 +317,7 @@ class DataForSEO:
             return []
 
         keywords = []
-        for item in result.get("items", []):
+        for item in (result.get("items") or []):
             keywords.append(
                 {
                     "keyword": item.get("keyword_data", {}).get("keyword"),
@@ -376,7 +376,7 @@ class DataForSEO:
             return []
 
         questions = []
-        for item in result.get("items", []):
+        for item in (result.get("items") or []):
             kw = item.get("keyword_data", {}).get("keyword", "")
 
             # Filter for questions

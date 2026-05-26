@@ -520,15 +520,16 @@ class KeywordAnalyzer:
 
         # Primary keyword density
         status = primary_analysis['density_status']
+        kw_label = primary_analysis.get('keyword', 'the primary keyword')
         if status == "too_low":
             recommendations.append(
                 f"⚠️ Primary keyword density is too low ({primary_analysis['density']}%). "
-                f"Target is {target_density}%. Add {primary_analysis['keyword']} naturally in more paragraphs."
+                f"Target is {target_density}%. Add {kw_label} naturally in more paragraphs."
             )
         elif status == "slightly_low":
             recommendations.append(
                 f"ℹ️ Primary keyword density is slightly low ({primary_analysis['density']}%). "
-                f"Consider adding a few more mentions of '{primary_analysis['keyword']}'."
+                f"Consider adding a few more mentions of '{kw_label}'."
             )
         elif status == "too_high":
             recommendations.append(
@@ -568,8 +569,9 @@ class KeywordAnalyzer:
         # Secondary keywords
         for analysis in secondary_analysis:
             if analysis['total_occurrences'] == 0:
+                sec_label = analysis.get('keyword', 'secondary keyword')
                 recommendations.append(
-                    f"ℹ️ Secondary keyword '{analysis['keyword']}' not found in content - consider adding it"
+                    f"ℹ️ Secondary keyword '{sec_label}' not found in content - consider adding it"
                 )
 
         return recommendations
